@@ -153,7 +153,7 @@ torch.save(discriminator.state_dict(), './ckpt/discriminator.pth')
 with torch.no_grad():
     test_z = torch.randn(bs, g_input_dim).to(device)
     label_fake = torch.LongTensor(np.random.randint(0,10, bs)).to(device)
-    label_fake = one_hot_encoding(label_fake, c_dim)
+    label_fake = one_hot_encoding(label_fake, c_dim).to(device)
     generated_output = generator(test_z, label_fake)
 
     save_image(generated_output.view(bs, 1, 28,28), './images/sample_final.png')
